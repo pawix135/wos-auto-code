@@ -37,7 +37,9 @@ redeemeButton.addEventListener('click', async () => {
     try {
       const result = await handleRedeem(code, id);
       results.push(result);
-      redeemProgress(redeemProgressContainer, result);
+      if (result.player) {
+        redeemProgress(redeemProgressContainer, result);
+      }
     } catch (error) {
     }
   }
