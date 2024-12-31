@@ -6,20 +6,12 @@
   <link rel="icon" type="image/ico" href="/fav.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WOS Alliance Code Redeem</title>
+
 </head>
 
 <body>
-  <div id="app">
-    <div id="form" class="form">
-      <label for="code">Enter gift code</label>
-      <input type="text" id="code" placeholder="xEf3ugfps" />
-      <label for="ids">Enter your ids <span class="danger">(id separated by new line)</span></label>
-      <textarea id="ids" placeholder="123456789&#10;123456789&#10;123456789"></textarea>
-      <button id="redeem_button">Redeem</button>
-    </div>
-    <div id="redeemed_ids"></div>
-  </div>
-  <script type="module" src="/src/main.ts"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>
