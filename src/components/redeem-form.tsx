@@ -45,10 +45,16 @@ export const RedeemForm = () => {
 
   const handleSaveIds = () => {
     store.setIds(rawIds);
+    toast.success(`Ids saved!`);
   }
 
   const handleLoadIds = () => {
     const _ids = store.loadIds();
+    if (_ids.length === 0) {
+      toast.error('No ids found :(');
+      return;
+    }
+    toast.success(`Ids loaded!`);
     setRawIds(_ids.join('\n'));
   }
 

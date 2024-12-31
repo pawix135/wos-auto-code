@@ -13,7 +13,15 @@ export const ResultsPreview: React.FC<Props> = () => {
 
   useEffect(() => {
     if (areaRef.current) {
-      areaRef.current.scrollIntoView(false)
+      if (areaRef.current.children.length) {
+        const lastElement = areaRef.current.lastChild as HTMLElement
+
+        lastElement?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest',
+        })
+      }
     }
   }, [store.results])
 
