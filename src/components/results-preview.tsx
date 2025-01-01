@@ -1,8 +1,8 @@
 import { useAppStore } from "@/hooks/useAppStore";
 import { ScrollArea } from "./ui/scroll-area";
-import { caclProgress, cn } from "@/lib/utils";
-import { useEffect, useMemo, useRef } from "react";
-import { Progress } from "./ui/progress";
+import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
+import { RedeemProgress } from "./redeem-progress";
 
 interface Props {
 }
@@ -35,17 +35,11 @@ export const ResultsPreview: React.FC<Props> = () => {
     };
   }, [areaRef]);
 
-  const progress = useMemo(() => {
-    return caclProgress(store.results.length ?? 0, store.ids.length ?? 0)
-  }, [store.results, store.ids])
+
 
   return (
     <div className="space-y-2">
-      <div className="flex justify-between">
-        <span>1</span>
-        <span>{store.ids.length}</span>
-      </div>
-      <Progress value={progress} />
+      <RedeemProgress />
       <ScrollArea className="h-[300px]" >
         <div className="grid grid-cols-3 gap-4 grid-flow-row" ref={areaRef}>
           {store.results.map((result, index) => {
