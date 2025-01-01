@@ -27,3 +27,7 @@ export const createSignedQueryString = (params: any) => {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export function caclProgress(current: number, total: number) {
+  return (current / total) * 100;
+}

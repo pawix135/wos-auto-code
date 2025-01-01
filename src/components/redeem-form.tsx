@@ -22,6 +22,7 @@ export const RedeemForm = () => {
     store.clearResults();
     setIsRedeeming(true);
     const _ids = converTextToIds(rawIds);
+    store.setIds(rawIds);
     console.log('Redeeming:', code, _ids);
     for (let index = 0; index < _ids.length; index++) {
       const id = _ids[index];
