@@ -7,18 +7,17 @@ export const RedeemProgress: React.FC = () => {
 
   const store = useAppStore();
 
-  if (store.ids.length <= 0) {
-    return null
-  }
-
   const progress = useMemo(() => {
     return caclProgress(store.results.length ?? 0, store.ids.length ?? 0)
   }, [store.results, store.ids])
 
+  if (store.ids.length <= 0) {
+    return null
+  }
   return (
     <>
       <div className="flex justify-between">
-        <span>1</span>
+        <span>{store.results.length ?? 0}</span>
         <span>{store.ids.length}</span>
       </div>
       <Progress value={progress} />

@@ -19,19 +19,24 @@ export const RedeemForm = () => {
   const store = useAppStore();
 
   const handleRedeem = async () => {
-    store.clearResults();
+    if (!code || code.length <= 0) {
+      toast.error('Please enter a code');
+      return;
+    }
     setIsRedeeming(true);
-    const _ids = converTextToIds(rawIds);
+    store.clearResults();
     store.setIds(rawIds);
-    console.log('Redeeming:', code, _ids);
+
+    const _ids = converTextToIds(rawIds);
+
     for (let index = 0; index < _ids.length; index++) {
       const id = _ids[index];
       await new Promise(resolve => setTimeout(resolve, 1000));
       try {
         const result = await redeemCode(code, id);
         if (result.player) {
-          if (result.player.name === "Bridget") {
-            toast.info("BRIDGETTTTTTT")
+          if (result.player.id === "178460290") {
+            toast.info("BRIDGETTTTTTT FOUND!!")
           }
           store.pushResult(result);
         } else {

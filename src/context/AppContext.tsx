@@ -9,6 +9,7 @@ export const AppStoreContext = createContext<AppStore | null>(null);
 
 interface Props extends React.PropsWithChildren {
 }
+
 export const AppStoreProvider: React.FC<Props> = ({ children }) => {
 
   const [ids, setStateIds] = useState<string[]>([]);
@@ -18,17 +19,14 @@ export const AppStoreProvider: React.FC<Props> = ({ children }) => {
 
   const setIds = (rawIds: string) => {
     if (!rawIds || rawIds.length === 0) {
-      console.log('Ids not set, empty text area!');
       return;
     }
     const _ids = converTextToIds(rawIds);
     setStateIds(_ids);
-    persistIds(_ids);
   }
 
   const saveIds = useCallback(() => {
     if (ids.length === 0) {
-      console.log('Ids not saved, empty list!');
       return
     }
     persistIds(ids);
@@ -36,7 +34,6 @@ export const AppStoreProvider: React.FC<Props> = ({ children }) => {
 
   const loadIds = useCallback(() => {
     const _ids = idsFromStorage();
-    console.log('Loaded ids:', _ids);
     setStateIds(_ids);
     return _ids;
   }, [])

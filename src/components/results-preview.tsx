@@ -4,18 +4,15 @@ import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 import { RedeemProgress } from "./redeem-progress";
 
-interface Props {
-}
-
-export const ResultsPreview: React.FC<Props> = () => {
+export const ResultsPreview: React.FC = () => {
 
   const store = useAppStore();
-  const areaRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      if (areaRef.current) {
-        const lastElement = areaRef.current.lastChild as HTMLElement;
+      if (scrollAreaRef.current) {
+        const lastElement = scrollAreaRef.current.lastChild as HTMLElement;
         lastElement?.scrollIntoView({
           behavior: 'smooth',
           block: 'end',
@@ -24,24 +21,22 @@ export const ResultsPreview: React.FC<Props> = () => {
       }
     });
 
-    if (areaRef.current) {
-      observer.observe(areaRef.current, { childList: true });
+    if (scrollAreaRef.current) {
+      observer.observe(scrollAreaRef.current, { childList: true });
     }
 
     return () => {
-      if (areaRef.current) {
+      if (scrollAreaRef.current) {
         observer.disconnect();
       }
     };
-  }, [areaRef]);
-
-
+  }, [scrollAreaRef]);
 
   return (
     <div className="space-y-2">
       <RedeemProgress />
       <ScrollArea className="h-[300px]" >
-        <div className="grid grid-cols-3 gap-4 grid-flow-row" ref={areaRef}>
+        <div className="grid grid-cols-3 gap-4 grid-flow-row" ref={scrollAreaRef}>
           {store.results.map((result, index) => {
             return (
               <div key={`result-${index}`} className="w-full relative">

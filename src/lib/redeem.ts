@@ -6,11 +6,6 @@ export const redeemCode = async (code: string, id: string): Promise<RedeemResult
     time: Date.now(),
     fid: id,
   })
-  const payloadData = createSignedQueryString({
-    cdk: code,
-    time: Date.now(),
-    fid: id,
-  })
 
   const result: RedeemResult = {
     player: null,
@@ -36,6 +31,12 @@ export const redeemCode = async (code: string, id: string): Promise<RedeemResult
     name: loginJson.data.nickname,
     pfp: loginJson.data.avatar_image
   }
+
+  const payloadData = createSignedQueryString({
+    cdk: code,
+    time: Date.now(),
+    fid: id,
+  })
 
   const redeemResponse = await fetch('https://wos-giftcode-api.centurygame.com/api/gift_code', {
     method: 'POST',
