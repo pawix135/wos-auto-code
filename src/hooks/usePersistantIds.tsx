@@ -17,6 +17,7 @@ export const usePersistantIds = () => {
   }
 
   const persistIds = useCallback((ids: string[]) => {
+
     localStorage.setItem('ids', JSON.stringify(ids));
   }, [])
 
