@@ -23,6 +23,7 @@ export const RedeemForm = () => {
       toast.error('Please enter a code');
       return;
     }
+
     setIsRedeeming(true);
     store.clearResults();
     store.setIds(rawIds);
@@ -35,9 +36,6 @@ export const RedeemForm = () => {
       try {
         const result = await redeemCode(code, id);
         if (result.player) {
-          if (result.player.id === "178460290") {
-            toast.info("BRIDGETTTTTTT FOUND!!")
-          }
           store.pushResult(result);
         } else {
           toast.error(`Redeem failed, invalid player: ${id}`);
@@ -50,7 +48,12 @@ export const RedeemForm = () => {
   }
 
   const handleSaveIds = () => {
+    if (rawIds.length === 0) {
+      toast.success(`No ids to save!`);
+      return
+    }
     store.setIds(rawIds);
+    store.saveIds(rawIds);
     toast.success(`Ids saved!`);
   }
 

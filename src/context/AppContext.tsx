@@ -25,11 +25,12 @@ export const AppStoreProvider: React.FC<Props> = ({ children }) => {
     setStateIds(_ids);
   }
 
-  const saveIds = useCallback(() => {
-    if (ids.length === 0) {
-      return
+  const saveIds = useCallback((rawIds: string) => {
+    if (!rawIds || rawIds.length === 0) {
+      return;
     }
-    persistIds(ids);
+    const _ids = converTextToIds(rawIds);
+    persistIds(_ids);
   }, [ids])
 
   const loadIds = useCallback(() => {
